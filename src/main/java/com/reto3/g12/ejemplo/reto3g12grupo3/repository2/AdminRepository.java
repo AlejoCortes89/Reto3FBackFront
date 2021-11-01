@@ -20,18 +20,18 @@ import org.springframework.stereotype.Repository;
 public class AdminRepository {
     
     @Autowired
-     private AdminInterface crud;
+     private AdminInterface crud5;
      public List<Admin> getAll(){
-         return (List<Admin>) crud.findAll();
+         return (List<Admin>) crud5.findAll();
      }      
      public Optional<Admin> getAdmin(int id){
-         return crud.findById(id);
+         return crud5.findById(id);
      }
      public Admin save(Admin admin){
-         return crud.save(admin); 
+         return crud5.save(admin); 
      }
      public void delete(Admin admin){
-         crud.delete(admin);  
+         crud5.delete(admin);  
      }
     
 }

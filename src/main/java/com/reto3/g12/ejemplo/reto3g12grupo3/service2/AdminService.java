@@ -20,23 +20,23 @@ import org.springframework.stereotype.Service;
 public class AdminService {
     
     @Autowired
-    private AdminRepository crud6;
+    private AdminRepository crud5;
 
     public List<Admin> getAll(){
-        return crud6.getAll();
+        return crud5.getAll();
     }
 
     public Optional<Admin> getAdmin(int id) {
-        return crud6.getAdmin(id);
+        return crud5.getAdmin(id);
     }
 
     public Admin save(Admin admin){
         if(admin.getId()==null){
-            return crud6.save(admin);
+            return crud5.save(admin);
         }else{
-            Optional<Admin> e=crud6.getAdmin(admin.getId());
+            Optional<Admin> e=crud5.getAdmin(admin.getId());
             if(e.isEmpty()){
-                return crud6.save(admin);
+                return crud5.save(admin);
             }else{
                 return admin;
             }
@@ -45,7 +45,7 @@ public class AdminService {
 
     public Admin update(Admin admin){
         if(admin.getId()!=null){
-            Optional<Admin> e=crud6.getAdmin(admin.getId());
+            Optional<Admin> e=crud5.getAdmin(admin.getId());
             if(!e.isEmpty()){
                 if(admin.getName()!=null){
                     e.get().setName(admin.getName());
@@ -54,9 +54,9 @@ public class AdminService {
                     e.get().setEmail(admin.getEmail());
                 }
                 if(admin.getPassword()!=null){
-                    e.get().setPassword(admin.getPassword());
+                   e.get().setPassword(admin.getPassword());
                 }
-                crud6.save(e.get());
+                crud5.save(e.get());
                 return e.get();
             }else{
                 return admin;
@@ -65,5 +65,13 @@ public class AdminService {
             return admin;
         }
     }
+     public boolean deleteAdmin(int id) {
+        Boolean aBoolean = getAdmin(id).map(admin -> {
+            crud5.delete(admin);
+            return true;
+        }).orElse(false);
+        return aBoolean;
+    }
+    
     
 }
