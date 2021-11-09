@@ -5,6 +5,8 @@
 package com.reto3.g12.ejemplo.reto3g12grupo3.controller2;
 
 import com.reto3.g12.ejemplo.reto3g12grupo3.entity2.Reservation;
+import com.reto3.g12.ejemplo.reto3g12grupo3.reports2.CounterClient;
+import com.reto3.g12.ejemplo.reto3g12grupo3.reports2.StatusReservation;
 import com.reto3.g12.ejemplo.reto3g12grupo3.service2.ReservationService;
 import java.util.List;
 import java.util.Optional;
@@ -59,4 +61,21 @@ public class ReservationController {
     public boolean delete(@PathVariable("id") int reservationId) {
         return servicio.deleteReservation(reservationId);
     }
+    
+    @GetMapping("/report-status")
+    public StatusReservation getReservation(){
+        return servicio.reportStatusService();
+    }
+    
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+     public List<Reservation> getReservationTime (@PathVariable("dateOne")String dateOne, @PathVariable("dateTwo")String dateTwo ){
+         return servicio.reportTimeService(dateOne, dateTwo);
+     }
+     
+     @GetMapping("/report-clients")
+     public List<CounterClient> getClient(){
+         return servicio.reportClientService();
+     }
+    
+    
 }
